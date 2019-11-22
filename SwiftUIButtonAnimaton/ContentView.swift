@@ -9,8 +9,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showMenu = "HOME"
+    
     var body: some View {
-        Text("Hello, World!")
+        NavigationView {
+            TabView(selection: $showMenu) {
+                SecondView()
+                    .tabItem {
+                        showMenu == "HOME" ? Image(systemName: "house.fill") : Image(systemName: "house")
+                    Text("Home")
+                }.tag("HOME")
+                
+                ThirdView()
+                    .tabItem {
+                        Image(systemName: "rectangle.stack")
+                        Text("Setting")
+                }.tag("SETTINGS")
+            }.navigationBarTitle(Text(self.showMenu), displayMode: .inline)
+            .navigationBarBackButtonHidden(true)
+        }
     }
 }
 
